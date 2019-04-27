@@ -17,15 +17,18 @@ import logging
 import sys
 
 import docopt
+import ipaddress
+
+from .lcgit import RandomNetworkSequence
 
 
 def example():
     """A dummy function."""
-    logging.debug("This is a debug message")
-    logging.info("This is an info message")
-    logging.warning("This is a warning message")
-    logging.error("This is an error message")
-    logging.critical("This is a critical message")
+    net = ipaddress.ip_network("64.69.57.0/24")
+
+    rns = RandomNetworkSequence(net)
+    for i in rns:
+        print(i)
 
 
 def main():

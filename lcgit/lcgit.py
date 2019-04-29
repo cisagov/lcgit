@@ -55,6 +55,9 @@ class LCG(object):
     def __repr__(self):
         return f"{self.__class__.__name__}({self.start}, {self.end})"
 
+    def __len__(self):
+        return self.seqlength
+
 
 class LCGIterator(object):
     def __init__(self, parent):

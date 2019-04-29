@@ -5,8 +5,8 @@ see: https://stackoverflow.com/questions/44818884/all-numbers-in-a-given-range-b
 see: https://en.wikipedia.org/wiki/Linear_congruential_generator
 """
 
-
 from random import randint, shuffle
+from math import sin
 from collections.abc import Sequence
 from ipaddress import _BaseNetwork
 
@@ -38,7 +38,10 @@ class LCG(object):
                 "sequence must be an instance of sequence or ipaddress._BaseNetwork"
             )
         self.seq = sequence
-        (m, a, c) = lcg_params(self.start, self.end)
+        if self.seqlength > 4:
+            (m, a, c) = lcg_params(self.start, self.end)
+        else:
+            (m, a, c) = (1, 1, 1)
         self.modulus = m
         if state is None:
             # create a new state
@@ -52,13 +55,25 @@ class LCG(object):
     def __iter__(self):
         seed = self.seed
         index = self.index
-        while index < self.seqlength:
-            while True:
-                seed = (seed * self.multiplier + self.increment) % self.modulus
-                if seed < self.seqlength:
-                    break
-            index += 1
-            yield self.seq[seed], (self.multiplier, self.increment, seed, index)
+        if self.seqlength > 4:
+            # use LCG
+            while index < self.seqlength:
+                while True:
+                    seed = (seed * self.multiplier + self.increment) % self.modulus
+                    if seed < self.seqlength:
+                        break
+                index += 1
+                yield self.seq[seed], (self.multiplier, self.increment, seed, index)
+        else:
+            # use shuffle
+            shuffled_seq = list(self.seq)
+            shuffle(
+                shuffled_seq,
+                random=lambda: abs(sin(self.multiplier + self.increment + seed)),
+            )
+            for i in shuffled_seq[index:]:
+                index += 1
+                yield i, (self.multiplier, self.increment, seed, index)
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.start}, {self.end})"

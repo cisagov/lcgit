@@ -8,9 +8,9 @@ from lcgit import LCG
 sequences = [
     "foobar",
     range(10),
-    # net("192.168.1.0/32"),
-    # net("192.168.1.0/31"),
-    # net("192.168.1.0/30"),
+    net("192.168.1.0/32"),
+    net("192.168.1.0/31"),
+    net("192.168.1.0/30"),
     net("192.168.1.0/29"),
     net("192.168.1.0/28"),
     net("192.168.1.0/24"),
@@ -50,7 +50,7 @@ def test_state_save_and_restore(sequence):
         if count == break_at:
             break
     assert (
-        sorted(accumulated) != answer
+        len(lcg) <= 1 or sorted(accumulated) != answer
     ), "accumulated list should NOT be identical to answer list yet"
     lcg2 = LCG(sequence, state)
     for i, state in lcg2:

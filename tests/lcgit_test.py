@@ -60,3 +60,18 @@ def test_state_save_and_restore(sequence):
     assert (
         sorted(accumulated) == answer
     ), "accumulated list should be identical to answer list"
+
+
+@pytest.mark.parametrize("sequence", sequences)
+def test_iter_consistency(sequence):
+    lcg = LCG(sequence)
+    i = iter(lcg)
+    j = iter(lcg)
+    try:
+        while True:
+            (x, x_state) = next(i)
+            (y, y_state) = next(j)
+            assert x == y
+            assert x_state == y_state
+    except StopIteration:
+        pass

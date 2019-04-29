@@ -16,7 +16,7 @@ def lcg_params(u, v):
     # of numbers in the range (u..v)
     diff = v - u
     if diff < 4:
-        raise ValueError("Sorry, range must be at least 4.")
+        raise ValueError("range must be at least 4.")
     m = 2 ** diff.bit_length()  # Modulus
     a = (randint(1, (m >> 2) - 1) * 4) + 1  # Random odd integer, (a-1) divisible by 4
     c = randint(3, m) | 1  # Any odd integer will do

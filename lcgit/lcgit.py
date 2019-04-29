@@ -50,32 +50,18 @@ class LCG(object):
             (self.multiplier, self.increment, self.seed, self.index) = state
 
     def __iter__(self):
-        return LCGIterator(self)
+        seed = self.seed
+        index = self.index
+        while index < self.seqlength:
+            while True:
+                seed = (seed * self.multiplier + self.increment) % self.modulus
+                if seed < self.seqlength:
+                    break
+            index += 1
+            yield self.seq[seed], (self.multiplier, self.increment, seed, index)
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.start}, {self.end})"
 
     def __len__(self):
         return self.seqlength
-
-
-class LCGIterator(object):
-    def __init__(self, parent):
-        self.parent = parent
-        self.index = self.parent.index
-        self.seed = self.parent.seed
-
-    def __next__(self):
-        if self.index >= self.parent.seqlength:
-            raise StopIteration
-        while True:
-            self.seed = (
-                self.seed * self.parent.multiplier + self.parent.increment
-            ) % self.parent.modulus
-            if self.seed < self.parent.seqlength:
-                break
-        self.index += 1
-        return self.parent.seq[self.seed]
-
-    def save(self):
-        return (self.parent.multiplier, self.parent.increment, self.seed, self.index)

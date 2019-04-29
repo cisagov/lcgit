@@ -1,3 +1,3 @@
-from .lcgit import RandomNetworkIterator, RandomNetworkSequence
+from .lcgit import LCG
 
-__all__ = ["RandomNetworkIterator", "RandomNetworkSequence"]
+__all__ = ["LCG"]

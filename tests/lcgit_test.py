@@ -3,9 +3,11 @@
 
 import pytest
 from ipaddress import ip_network as net
-from lcgit import RandomNetworkSequence
+from lcgit import LCG
 
-networks = [
+sequences = [
+    "foobar",
+    range(10),
     net("192.168.1.0/32"),
     net("192.168.1.0/31"),
     net("192.168.1.0/30"),
@@ -18,17 +20,15 @@ networks = [
 ]
 
 
-@pytest.mark.parametrize("network", networks)
-def test_counts_and_dups(network):
-    """Test with different networks."""
-    rns = RandomNetworkSequence(network)
-    acc = set()
+@pytest.mark.parametrize("sequence", sequences)
+def test_counts_and_dups(sequence):
+    """Test a sequence."""
+    rns = LCG(sequence)
+    accumulated = []
     count = 0
     for i in rns:
         count += 1
-        print(count, i)
-        assert i not in acc, "address duplicated during generation"
-        acc.add(i)
-    net_size = int(network[-1]) - int(network[0]) + 1
-    assert count == net_size, "iterator loop not equal to network size"
-    assert len(acc) == net_size, "accumulated set of addresses to equal to network size"
+        accumulated.append(i)
+    answer = sorted([i for i in sequence])
+    accumulated = sorted(accumulated)
+    assert accumulated == answer, "accumulated list should be identical to answer list"

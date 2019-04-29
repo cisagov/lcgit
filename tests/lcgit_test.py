@@ -29,7 +29,7 @@ def test_counts_and_dups(sequence):
     lcg = LCG(sequence)
     accumulated = []
     count = 0
-    for i, state in lcg:
+    for i in lcg:
         count += 1
         accumulated.append(i)
     assert (
@@ -41,13 +41,12 @@ def test_counts_and_dups(sequence):
 def test_state_save_and_restore(sequence):
     """Verify state save and restore."""
     answer = sorted([i for i in sequence])
-    lcg = LCG(sequence)
+    lcg = LCG(sequence, emit=True)
     accumulated = []
     break_at = len(lcg) / 2
     count = 0
     state = None
     for i, state in lcg:
-        print(f"a: {state}")
         count += 1
         accumulated.append(i)
         if count == break_at:
@@ -57,8 +56,7 @@ def test_state_save_and_restore(sequence):
     ), "accumulated list should NOT be identical to answer list yet"
     if state:  # empty sequences won't generate state
         lcg2 = LCG(sequence, state)
-        for i, state in lcg2:
-            print(f"b: {state}")
+        for i in lcg2:
             count += 1
             accumulated.append(i)
         assert (
@@ -68,7 +66,7 @@ def test_state_save_and_restore(sequence):
 
 @pytest.mark.parametrize("sequence", sequences)
 def test_iter_consistency(sequence):
-    lcg = LCG(sequence)
+    lcg = LCG(sequence, emit=True)
     i = iter(lcg)
     j = iter(lcg)
     try:

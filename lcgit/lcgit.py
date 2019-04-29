@@ -24,7 +24,8 @@ def lcg_params(u, v):
 
 
 class LCG(object):
-    def __init__(self, sequence, state=None):
+    def __init__(self, sequence, state=None, emit=False):
+        self.emit = emit
         if isinstance(sequence, Sequence):
             self.seqlength = len(sequence)
             self.start = 0
@@ -63,7 +64,10 @@ class LCG(object):
                     if seed < self.seqlength:
                         break
                 index += 1
-                yield self.seq[seed], (self.multiplier, self.increment, seed, index)
+                if self.emit:
+                    yield self.seq[seed], (self.multiplier, self.increment, seed, index)
+                else:
+                    yield self.seq[seed]
         else:
             # use shuffle
             shuffled_seq = list(self.seq)
@@ -73,7 +77,10 @@ class LCG(object):
             )
             for i in shuffled_seq[index:]:
                 index += 1
-                yield i, (self.multiplier, self.increment, seed, index)
+                if self.emit:
+                    yield i, (self.multiplier, self.increment, seed, index)
+                else:
+                    yield i
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.start}, {self.end})"

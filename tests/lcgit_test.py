@@ -6,6 +6,8 @@ from ipaddress import ip_network as net
 from lcgit import LCG
 
 sequences = [
+    [],
+    [1],
     "foobar",
     range(10),
     net("192.168.1.0/32"),
@@ -43,6 +45,7 @@ def test_state_save_and_restore(sequence):
     accumulated = []
     break_at = len(lcg) / 2
     count = 0
+    state = None
     for i, state in lcg:
         print(f"a: {state}")
         count += 1
@@ -52,14 +55,15 @@ def test_state_save_and_restore(sequence):
     assert (
         len(lcg) <= 1 or sorted(accumulated) != answer
     ), "accumulated list should NOT be identical to answer list yet"
-    lcg2 = LCG(sequence, state)
-    for i, state in lcg2:
-        print(f"b: {state}")
-        count += 1
-        accumulated.append(i)
-    assert (
-        sorted(accumulated) == answer
-    ), "accumulated list should be identical to answer list"
+    if state:  # empty sequences won't generate state
+        lcg2 = LCG(sequence, state)
+        for i, state in lcg2:
+            print(f"b: {state}")
+            count += 1
+            accumulated.append(i)
+        assert (
+            sorted(accumulated) == answer
+        ), "accumulated list should be identical to answer list"
 
 
 @pytest.mark.parametrize("sequence", sequences)
@@ -71,7 +75,9 @@ def test_iter_consistency(sequence):
         while True:
             (x, x_state) = next(i)
             (y, y_state) = next(j)
-            assert x == y
-            assert x_state == y_state
+            assert x == y, "identical iterators should generate identical values"
+            assert (
+                x_state == y_state
+            ), "identical iterators should generate identical states"
     except StopIteration:
         pass

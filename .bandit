@@ -1,2 +1,0 @@
-# skip assertion check since we need these in our pytests
-skips: ['B101']

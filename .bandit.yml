@@ -1,10 +1,12 @@
-# Configuration file for Bandit
+# Configuration file for the Bandit security issue scanner
 # https://bandit.readthedocs.io/en/latest/config.html
 
-# (optional) list included tests here:
-# tests: ['B201', 'B301']
+# Test are first included by `tests`, and then excluded by `skips`.
+# If `tests` is empty, all tests are are considered included.
 
-# (optional) list skipped tests here:
-skips: ['B101']
+tests:
+  #- B101
+  #- B102
 
-# B101: skip assertion check since we need these in our pytests
+skips:
+  - B101 # skip "assert used" check since we need assertions for pytests

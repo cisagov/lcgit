@@ -51,7 +51,6 @@ setup(
     keywords=["iterator", "lcg", "network"],
     packages=["lcgit"],
     install_requires=[],
-    tests_require=["pytest"],
     extras_require={"test": ["pre-commit", "pytest"]},
     # Conveniently allows one to run the CLI tool as `example`
     # entry_points={"console_scripts": ["example = example.example:main"]},

@@ -17,7 +17,7 @@ def readme():
 
 
 setup(
-    name="add",
+    name="lcgit",
     # Versions should comply with PEP440
     version="0.0.1",
     description="LCG iterator python library",
@@ -49,7 +49,7 @@ setup(
         "Programming Language :: Python :: 3.7",
     ],
     # What does your project relate to?
-    keywords=["iterator", "lcg", "network"],
+    keywords=["iterator", "lcg", "network", "random"],
     packages=["lcgit"],
     install_requires=[],
     extras_require={"test": ["pre-commit", "pytest"]},

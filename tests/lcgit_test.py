@@ -66,6 +66,7 @@ def test_state_save_and_restore(sequence):
 
 @pytest.mark.parametrize("sequence", sequences)
 def test_iter_consistency(sequence):
+    """Verify that iterators are consistent for an LCG."""
     lcg = LCG(sequence, emit=True)
     i = iter(lcg)
     j = iter(lcg)

@@ -1,5 +1,5 @@
 """
-setup module for example
+setup module for lcg.
 
 Based on:
 
@@ -11,6 +11,7 @@ from setuptools import setup
 
 
 def readme():
+    """Read in and return the contents of the project's README.md file."""
     with open("README.md") as f:
         return f.read()
 
@@ -52,6 +53,4 @@ setup(
     packages=["lcgit"],
     install_requires=[],
     extras_require={"test": ["pre-commit", "pytest"]},
-    # Conveniently allows one to run the CLI tool as `example`
-    # entry_points={"console_scripts": ["example = example.example:main"]},
 )

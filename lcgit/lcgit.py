@@ -15,7 +15,7 @@ from collections.abc import Sequence
 from ipaddress import _BaseNetwork
 
 
-def __lcg_params(u, v):
+def _lcg_params(u, v):
     """Generate parameters for an LCG.
 
     The parameters will produces a maximal length sequence of numbers
@@ -78,7 +78,7 @@ class LCG(object):
             )
         self.seq = sequence
         if self.seqlength > 4:
-            (m, a, c) = __lcg_params(self.start, self.end)
+            (m, a, c) = _lcg_params(self.start, self.end)
         else:
             (m, a, c) = (1, 1, 1)
         self.modulus = m

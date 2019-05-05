@@ -17,8 +17,8 @@ sequences = [
     net("192.168.1.0/28"),
     net("192.168.1.0/24"),
     net("192.168.0.0/20"),
-    # net("172.16.0.0/12"), # execution time too long
-    # net("10.0.0.0/8"), # execution time too long
+    pytest.param(net("172.16.0.0/12"), marks=pytest.mark.slow),
+    pytest.param(net("10.0.0.0/8"), marks=pytest.mark.slow),
 ]
 
 

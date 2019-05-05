@@ -11,10 +11,10 @@ minimal state?  Then you need a
 [Linear Congruential Generator](https://en.wikipedia.org/wiki/Linear_congruential_generator)!
 
 ```python
-from lcgit import LCG
+from lcgit import lcg
 from ip_address import ip_network
 
-for i in LCG(ip_network("10.0.0.0/8")):
+for i in lcg(ip_network("10.0.0.0/8")):
   print(i)
 ```
 
@@ -22,17 +22,17 @@ The code above, will print out each of the 16,777,216 IPs in the `10.0.0.0/8`
 network in random order.  Which is useful.  But what would be more useful is
 if you can output some now, save your state, and do some more later!
 
-This is where `emit` comes in.  Creating an `LCG` with `emit=True` will cause
+This is where `emit` comes in.  Creating an `lcg` with `emit=True` will cause
 the iterator to emit its state along with the sequence value.  If you save
-this state, and pass it back to a new `LCG` it will produce iterators that will
+this state, and pass it back to a new `lcg` it will produce iterators that will
 continue the random sequence where you left off.
 
 ```python
-from lcgit import LCG
+from lcgit import lcg
 from ipaddress import ip_network
 
-lcg = LCG(ip_network("192.168.1.0/24"), emit=True)
-it = iter(lcg)
+my_lcg = lcg(ip_network("192.168.1.0/24"), emit=True)
+it = iter(my_lcg)
 # print the first 32 random values
 for i in range(32):
   value, state = next(it)
@@ -52,9 +52,9 @@ the same sequence, and pass in your stored `state`:
 
 ```python
 restored = load_it(from_somewhere) # (149, 223, 161, 32)
-lcg = LCG(ip_network("192.168.1.0/24"), state=restored)
+my_new_lcg = lcg(ip_network("192.168.1.0/24"), state=restored)
 # print the remaining values
-for i in lcg:
+for i in my_new_lcg:
   print(i)
 ```
 
@@ -62,7 +62,7 @@ for i in lcg:
 [Python sequence types](https://docs.python.org/3/library/stdtypes.html#typesseq).
 
 ```python
-for i in LCG(range(100_000_000_000_000)):
+for i in lcg(range(100_000_000_000_000)):
   print(i)
 ```
 

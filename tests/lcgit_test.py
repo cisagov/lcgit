@@ -3,7 +3,7 @@
 
 import pytest
 from ipaddress import ip_network as net
-from lcgit import LCG, lcgit
+from lcgit import lcg, lcgit
 
 sequences = [
     [],
@@ -26,10 +26,10 @@ sequences = [
 def test_counts_and_dups(sequence):
     """Verify LCG output integrity."""
     answer = sorted([i for i in sequence])
-    lcg = LCG(sequence)
+    my_lcg = lcg(sequence)
     accumulated = []
     count = 0
-    for i in lcg:
+    for i in my_lcg:
         count += 1
         accumulated.append(i)
     assert (
@@ -41,21 +41,21 @@ def test_counts_and_dups(sequence):
 def test_state_save_and_restore(sequence):
     """Verify state save and restore."""
     answer = sorted([i for i in sequence])
-    lcg = LCG(sequence, emit=True)
+    lcg1 = lcg(sequence, emit=True)
     accumulated = []
-    break_at = len(lcg) / 2
+    break_at = len(lcg1) / 2
     count = 0
     state = None
-    for i, state in lcg:
+    for i, state in lcg1:
         count += 1
         accumulated.append(i)
         if count == break_at:
             break
     assert (
-        len(lcg) <= 1 or sorted(accumulated) != answer
+        len(lcg1) <= 1 or sorted(accumulated) != answer
     ), "accumulated list should NOT be identical to answer list yet"
     if state:  # empty sequences won't generate state
-        lcg2 = LCG(sequence, state)
+        lcg2 = lcg(sequence, state)
         for i in lcg2:
             count += 1
             accumulated.append(i)
@@ -67,9 +67,9 @@ def test_state_save_and_restore(sequence):
 @pytest.mark.parametrize("sequence", sequences)
 def test_iter_consistency(sequence):
     """Verify that iterators are consistent for an LCG."""
-    lcg = LCG(sequence, emit=True)
-    i = iter(lcg)
-    j = iter(lcg)
+    lcg1 = lcg(sequence, emit=True)
+    i = iter(lcg1)
+    j = iter(lcg1)
     try:
         while True:
             (x, x_state) = next(i)
@@ -91,11 +91,11 @@ def test_too_small_range():
 def test_invalid_input():
     """Check for expected exception when constructed with improper input."""
     with pytest.raises(ValueError):
-        LCG(1)
+        lcg(1)
 
 
 def test_repr():
     """Verify that the repr is in the expected format."""
-    lcg = LCG("foobar")
-    r = repr(lcg)
-    assert r == "LCG(0, 5)"
+    lcg1 = lcg("foobar")
+    r = repr(lcg1)
+    assert r == "lcg(0, 5)"

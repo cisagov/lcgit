@@ -33,7 +33,7 @@ def _lcg_params(u, v):
     return (m, a, c)
 
 
-class LCG(object):
+class lcg(object):
     """A Linear Congruential Generator object.
 
     This LCG class contains methods which are used to generate random, non-repeating,

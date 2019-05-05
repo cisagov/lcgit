@@ -3,7 +3,7 @@
 
 import pytest
 from ipaddress import ip_network as net
-from lcgit import LCG
+from lcgit import LCG, lcgit
 
 sequences = [
     [],
@@ -80,3 +80,22 @@ def test_iter_consistency(sequence):
             ), "identical iterators should generate identical states"
     except StopIteration:
         pass
+
+
+def test_too_small_range():
+    """Check for expected exception when range is too small."""
+    with pytest.raises(ValueError):
+        lcgit._lcg_params(1, 2)
+
+
+def test_invalid_input():
+    """Check for expected exception when constructed with improper input."""
+    with pytest.raises(ValueError):
+        LCG(1)
+
+
+def test_repr():
+    """Verify that the repr is in the expected format."""
+    lcg = LCG("foobar")
+    r = repr(lcg)
+    assert r == "LCG(0, 5)"

@@ -52,5 +52,5 @@ setup(
     keywords=["iterator", "lcg", "network", "random"],
     packages=["lcgit"],
     install_requires=[],
-    extras_require={"test": ["pre-commit", "pytest"]},
+    extras_require={"test": ["pre-commit", "pytest", "pytest-cov", "coveralls"]},
 )

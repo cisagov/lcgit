@@ -1,6 +1,7 @@
 # lcgit 🎰
 
 [![Build Status](https://travis-ci.com/cisagov/lcgit.svg?branch=develop)](https://travis-ci.com/cisagov/lcgit)
+[![Coverage Status](https://coveralls.io/repos/github/cisagov/lcgit/badge.svg?branch=develop)](https://coveralls.io/github/cisagov/lcgit?branch=develop)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/lcgit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/lcgit/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/lcgit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/lcgit/context:python)
 

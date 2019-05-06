@@ -55,7 +55,7 @@ repos:
         args:
           - --config=.bandit.yml
   - repo: https://github.com/python/black
-    rev: stable
+    rev: 19.3b0
     hooks:
       - id: black
   - repo: https://github.com/ansible/ansible-lint.git

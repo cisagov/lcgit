@@ -6,4 +6,4 @@ and IP networks.
 from .lcgit import lcg
 
 __all__ = ["lcg"]
-__version__ = "1.0"
+__version__ = "0.0.1"

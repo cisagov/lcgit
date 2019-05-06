@@ -8,7 +8,8 @@
 Do you want to loop randomly through every item in huge sequence without
 outputting the same item twice?  Would you like to do this while keeping
 minimal state?  Then you need a
-[Linear Congruential Generator](https://en.wikipedia.org/wiki/Linear_congruential_generator)!
+[Linear Congruential Generator](https://en.wikipedia.org/wiki/Linear_congruential_generator)
+iterator!
 
 ```python
 from lcgit import lcg

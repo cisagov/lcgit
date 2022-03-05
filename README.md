@@ -1,4 +1,4 @@
-# lcgit 🎰
+# lcgit 🎰 #
 
 [![GitHub Build Status](https://github.com/cisagov/lcgit/workflows/build/badge.svg)](https://github.com/cisagov/lcgit/actions)
 [![Coverage Status](https://coveralls.io/repos/github/cisagov/lcgit/badge.svg?branch=develop)](https://coveralls.io/github/cisagov/lcgit?branch=develop)
@@ -68,14 +68,14 @@ for i in lcg(range(100_000_000_000_000)):
   print(i)
 ```
 
-## NOOICE! 🕺
+## NOOICE! 🕺 ##
 
-## Contributing
+## Contributing ##
 
 We welcome contributions!  Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
 details.
 
-## License
+## License ##
 
 This project is in the worldwide [public domain](LICENSE).
 

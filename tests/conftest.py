@@ -2,6 +2,7 @@
 
 https://docs.pytest.org/en/latest/writing_plugins.html#conftest-py-plugins
 """
+# Third-Party Libraries
 import pytest
 
 
@@ -10,6 +11,11 @@ def pytest_addoption(parser):
     parser.addoption(
         "--runslow", action="store_true", default=False, help="run slow tests"
     )
+
+
+def pytest_configure(config):
+    """Register new markers."""
+    config.addinivalue_line("markers", "slow: mark test as slow")
 
 
 def pytest_collection_modifyitems(config, items):

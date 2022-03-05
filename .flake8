@@ -3,6 +3,8 @@ max-line-length = 80
 # Select (turn on)
 # * Complexity violations reported by mccabe (C) -
 #   http://flake8.pycqa.org/en/latest/user/error-codes.html#error-violation-codes
+# * Documentation conventions compliance reported by pydocstyle (D) -
+#   http://www.pydocstyle.org/en/stable/error_codes.html
 # * Default errors and warnings reported by pycodestyle (E and W) -
 #   https://pycodestyle.readthedocs.io/en/latest/intro.html#error-codes
 # * Default errors reported by pyflakes (F) -

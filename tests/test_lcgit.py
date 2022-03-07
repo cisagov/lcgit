@@ -1,8 +1,13 @@
 #!/usr/bin/env pytest -vs
 """Tests for lcgit."""
 
-import pytest
+# Standard Python Libraries
 from ipaddress import ip_network as net
+
+# Third-Party Libraries
+import pytest
+
+# cisagov Libraries
 from lcgit import lcg, lcgit
 
 sequences = [
@@ -25,7 +30,7 @@ sequences = [
 @pytest.mark.parametrize("sequence", sequences)
 def test_counts_and_dups(sequence):
     """Verify LCG output integrity."""
-    answer = sorted([i for i in sequence])
+    answer = sorted(i for i in sequence)
     my_lcg = lcg(sequence)
     accumulated = []
     count = 0
@@ -40,7 +45,7 @@ def test_counts_and_dups(sequence):
 @pytest.mark.parametrize("sequence", sequences)
 def test_state_save_and_restore(sequence):
     """Verify state save and restore."""
-    answer = sorted([i for i in sequence])
+    answer = sorted(i for i in sequence)
     lcg1 = lcg(sequence, emit=True)
     accumulated = []
     break_at = len(lcg1) / 2

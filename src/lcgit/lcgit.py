@@ -9,10 +9,11 @@ see: https://stackoverflow.com/questions/44818884/all-numbers-in-a-given-range-b
 see: https://en.wikipedia.org/wiki/Linear_congruential_generator
 """
 
-from random import randint, shuffle
-from math import sin
+# Standard Python Libraries
 from collections.abc import Sequence
 from ipaddress import _BaseNetwork
+from math import sin
+from random import randint, shuffle
 
 
 def _lcg_params(u, v):

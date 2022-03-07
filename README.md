@@ -1,9 +1,10 @@
-# lcgit 🎰
+# lcgit 🎰 #
 
-[![Build Status](https://travis-ci.com/cisagov/lcgit.svg?branch=develop)](https://travis-ci.com/cisagov/lcgit)
+[![GitHub Build Status](https://github.com/cisagov/lcgit/workflows/build/badge.svg)](https://github.com/cisagov/lcgit/actions)
 [![Coverage Status](https://coveralls.io/repos/github/cisagov/lcgit/badge.svg?branch=develop)](https://coveralls.io/github/cisagov/lcgit?branch=develop)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/lcgit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/lcgit/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/lcgit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/lcgit/context:python)
+[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/lcgit/develop/badge.svg)](https://snyk.io/test/github/cisagov/lcgit)
 
 Do you want to loop randomly through every item in huge sequence without
 outputting the same item twice?  Would you like to do this while keeping
@@ -67,16 +68,16 @@ for i in lcg(range(100_000_000_000_000)):
   print(i)
 ```
 
-## NOOICE! 🕺
+## NOOICE! 🕺 ##
 
-## Contributing
+## Contributing ##
 
-We welcome contributions!  Please see [here](CONTRIBUTING.md) for
+We welcome contributions!  Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
 details.
 
-## License
+## License ##
 
-This project is in the worldwide [public domain](LICENSE.md).
+This project is in the worldwide [public domain](LICENSE).
 
 This project is in the public domain within the United States, and
 copyright and related rights in the work worldwide are waived through

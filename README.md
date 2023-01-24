@@ -1,9 +1,8 @@
 # lcgit 🎰 #
 
 [![GitHub Build Status](https://github.com/cisagov/lcgit/workflows/build/badge.svg)](https://github.com/cisagov/lcgit/actions)
+[![CodeQL](https://github.com/cisagov/lcgit/workflows/CodeQL/badge.svg)](https://github.com/cisagov/lcgit/actions/workflows/codeql-analysis.yml)
 [![Coverage Status](https://coveralls.io/repos/github/cisagov/lcgit/badge.svg?branch=develop)](https://coveralls.io/github/cisagov/lcgit?branch=develop)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/lcgit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/lcgit/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/lcgit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/lcgit/context:python)
 [![Known Vulnerabilities](https://snyk.io/test/github/cisagov/lcgit/develop/badge.svg)](https://snyk.io/test/github/cisagov/lcgit)
 
 Do you want to loop randomly through every item in huge sequence without

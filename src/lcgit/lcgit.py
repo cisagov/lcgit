@@ -13,7 +13,7 @@ see: https://en.wikipedia.org/wiki/Linear_congruential_generator
 from collections.abc import Sequence
 from ipaddress import _BaseNetwork
 from math import sin
-from random import randint, shuffle
+from random import Random, randint
 
 
 def _lcg_params(u, v):
@@ -117,10 +117,11 @@ class lcg(object):
         else:
             # use shuffle
             shuffled_seq = list(self.seq)
-            shuffle(
-                shuffled_seq,
-                random=lambda: abs(sin(self.multiplier + self.increment + seed)),
+            seeded_random = Random()
+            seeded_random.seed(
+                abs(sin(self.multiplier + self.increment + seed)), version=1
             )
+            seeded_random.shuffle(shuffled_seq)
             for i in shuffled_seq[index:]:
                 index += 1
                 if self.emit:

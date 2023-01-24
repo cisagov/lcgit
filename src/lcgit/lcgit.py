@@ -102,8 +102,11 @@ class lcg(object):
         """
         seed = self.seed
         index = self.index
+
+        # The LCG algorithm requires a sequence of more than 4 elements to operate.
+        # If the sequence is not sufficiently large, we will fall back to the shuffle method.
         if self.seqlength > 4:
-            # use LCG
+            # Sequence is large enough to use LCG algorithm
             while index < self.seqlength:
                 while True:
                     seed = (seed * self.multiplier + self.increment) % self.modulus
@@ -115,7 +118,7 @@ class lcg(object):
                 else:
                     yield self.seq[seed]
         else:
-            # use shuffle
+            # Sequence is too small to use LCG algorithm, use shuffle instead
             shuffled_seq = list(self.seq)
             seeded_random = Random()
             seeded_random.seed(

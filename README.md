@@ -13,7 +13,7 @@ iterator!
 
 ```python
 from lcgit import lcg
-from ip_address import ip_network
+from ipaddress import ip_network
 
 for i in lcg(ip_network("10.0.0.0/8")):
   print(i)

@@ -120,7 +120,11 @@ class lcg:
         else:
             # Sequence is too small to use LCG algorithm, use shuffle instead
             shuffled_seq = list(self.seq)
-            seeded_random = Random()
+            # The following line generates a warning from bandit about
+            # "Standard pseudo-random generators are not suitable for
+            # security/cryptographic purposes."  We aren't using Random() for
+            # the purposes of cryptography here, so we ignore that warning.
+            seeded_random = Random()  # nosec B311
             seeded_random.seed(
                 abs(sin(self.multiplier + self.increment + seed)), version=1
             )

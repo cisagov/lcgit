@@ -58,9 +58,6 @@ test = [
     "pytest",
 ]
 
-[project.scripts]
-example = "example.example:main"
-
 [project.urls]
 homepage = "https://github.com/cisagov/lcgit"
 issues = "https://github.com/cisagov/lcgit/issues"

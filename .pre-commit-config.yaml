@@ -171,8 +171,7 @@ repos:
         # mypy pre-commit hook additional_dependencies in sync with
         # the dev section of setup.py to avoid discrepancies in type
         # checking between environments.
-        additional_dependencies:
-          - types-setuptools
+        additional_dependencies: []
   - repo: https://github.com/pypa/pip-audit
     rev: v2.9.0
     hooks:

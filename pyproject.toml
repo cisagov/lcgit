@@ -47,9 +47,7 @@ requires-python = ">=3.10"
 # dependencies here should be reflected in the additional_dependencies
 # field of the mypy pre-commit hook to avoid discrepancies in type
 # checking between environments.
-dev = [
-    "types-setuptools",
-]
+dev = []
 test = [
     "coverage",
     "coveralls",

@@ -33,7 +33,7 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
 ]
 dependencies = []
-description = "LCG iterator Python library"
+description = "A Linear Congruential Generator (LCG) iterator Python library"
 dynamic = ["readme", "version"]
 keywords = ["iterator", "lcg", "network", "random"]
 license = "CC0-1.0"

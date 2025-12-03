@@ -1,8 +1,10 @@
 # lcgit 🎰 #
 
 [![GitHub Build Status](https://github.com/cisagov/lcgit/workflows/build/badge.svg)](https://github.com/cisagov/lcgit/actions)
+[![License](https://img.shields.io/github/license/cisagov/lcgit)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/lcgit/workflows/CodeQL/badge.svg)](https://github.com/cisagov/lcgit/actions/workflows/codeql-analysis.yml)
 [![Coverage Status](https://coveralls.io/repos/github/cisagov/lcgit/badge.svg?branch=develop)](https://coveralls.io/github/cisagov/lcgit?branch=develop)
+[![Code Style](https://img.shields.io/badge/Code%20Style-black-black)](https://github.com/psf/black)
 
 Do you want to loop randomly through every item in huge sequence without
 outputting the same item twice?  Would you like to do this while keeping

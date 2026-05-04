@@ -39,7 +39,9 @@ def _lcg_params(u, v):
     return (m, a, c)
 
 
-class lcg:
+# flake8 wants the names of classes to use a CapWords convention, but
+# this class doesn't.
+class lcg:  # noqa: N801
     """A Linear Congruential Generator object.
 
     This LCG class contains methods which are used to generate random, non-repeating,

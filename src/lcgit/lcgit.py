@@ -13,7 +13,11 @@ see: https://en.wikipedia.org/wiki/Linear_congruential_generator
 from collections.abc import Sequence
 from ipaddress import _BaseNetwork
 from math import sin
-from random import Random, randint
+
+# We aren't using random numbers for the purpose of cryptography here,
+# so it is safe to ignore the DUO102 error that flake8 generates for
+# using random.Random.
+from random import Random, randint  # noqa: DUO102
 
 
 def _lcg_params(u, v):

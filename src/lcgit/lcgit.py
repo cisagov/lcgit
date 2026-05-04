@@ -5,8 +5,9 @@ Implementation of a Linear Congruential Generator.
 This LCG can be used to quickly generate random, non-repeating, maximal length sequences
 from existing sequences and IP networks.
 
-see: https://stackoverflow.com/questions/44818884/all-numbers-in-a-given-range-but-random-order
-see: https://en.wikipedia.org/wiki/Linear_congruential_generator
+See:
+https://stackoverflow.com/questions/44818884/all-numbers-in-a-given-range-but-random-order
+https://en.wikipedia.org/wiki/Linear_congruential_generator
 """
 
 # Standard Python Libraries

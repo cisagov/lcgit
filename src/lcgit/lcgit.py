@@ -107,8 +107,9 @@ class lcg:
         seed = self.seed
         index = self.index
 
-        # The LCG algorithm requires a sequence of more than 4 elements to operate.
-        # If the sequence is not sufficiently large, we will fall back to the shuffle method.
+        # The LCG algorithm requires a sequence of more than 4 elements
+        # to operate.  If the sequence is not sufficiently large, we
+        # will fall back to the shuffle method.
         if self.seqlength > 4:
             # Sequence is large enough to use LCG algorithm
             while index < self.seqlength:

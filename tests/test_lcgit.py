@@ -76,8 +76,8 @@ def test_iter_consistency(sequence):
     j = iter(lcg1)
     try:
         while True:
-            (x, x_state) = next(i)
-            (y, y_state) = next(j)
+            x, x_state = next(i)
+            y, y_state = next(j)
             assert x == y, "identical iterators should generate identical values"
             assert (
                 x_state == y_state

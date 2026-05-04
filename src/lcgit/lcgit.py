@@ -79,18 +79,18 @@ class lcg:
             )
         self.seq = sequence
         if self.seqlength > 4:
-            (m, a, c) = _lcg_params(self.start, self.end)
+            m, a, c = _lcg_params(self.start, self.end)
         else:
-            (m, a, c) = (1, 1, 1)
+            m, a, c = (1, 1, 1)
         self.modulus = m
         if state is None:
             # create a new state
-            (self.multiplier, self.increment) = (a, c)
+            self.multiplier, self.increment = (a, c)
             self.seed = 1
             self.index = 0
         else:
             # load passed in state
-            (self.multiplier, self.increment, self.seed, self.index) = state
+            self.multiplier, self.increment, self.seed, self.index = state
 
     def __iter__(self):
         """Generate Iterator over the randomized sequence.

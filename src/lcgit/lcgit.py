@@ -5,15 +5,20 @@ Implementation of a Linear Congruential Generator.
 This LCG can be used to quickly generate random, non-repeating, maximal length sequences
 from existing sequences and IP networks.
 
-see: https://stackoverflow.com/questions/44818884/all-numbers-in-a-given-range-but-random-order
-see: https://en.wikipedia.org/wiki/Linear_congruential_generator
+See:
+https://stackoverflow.com/questions/44818884/all-numbers-in-a-given-range-but-random-order
+https://en.wikipedia.org/wiki/Linear_congruential_generator
 """
 
 # Standard Python Libraries
 from collections.abc import Sequence
 from ipaddress import _BaseNetwork
 from math import sin
-from random import Random, randint
+
+# We aren't using random numbers for the purpose of cryptography here,
+# so it is safe to ignore the DUO102 error that flake8 generates for
+# using random.Random.
+from random import Random, randint  # noqa: DUO102
 
 
 def _lcg_params(u, v):
@@ -34,7 +39,9 @@ def _lcg_params(u, v):
     return (m, a, c)
 
 
-class lcg:
+# flake8 wants the names of classes to use a CapWords convention, but
+# this class doesn't.
+class lcg:  # noqa: N801
     """A Linear Congruential Generator object.
 
     This LCG class contains methods which are used to generate random, non-repeating,
@@ -79,18 +86,18 @@ class lcg:
             )
         self.seq = sequence
         if self.seqlength > 4:
-            (m, a, c) = _lcg_params(self.start, self.end)
+            m, a, c = _lcg_params(self.start, self.end)
         else:
-            (m, a, c) = (1, 1, 1)
+            m, a, c = (1, 1, 1)
         self.modulus = m
         if state is None:
             # create a new state
-            (self.multiplier, self.increment) = (a, c)
+            self.multiplier, self.increment = (a, c)
             self.seed = 1
             self.index = 0
         else:
             # load passed in state
-            (self.multiplier, self.increment, self.seed, self.index) = state
+            self.multiplier, self.increment, self.seed, self.index = state
 
     def __iter__(self):
         """Generate Iterator over the randomized sequence.
@@ -103,8 +110,9 @@ class lcg:
         seed = self.seed
         index = self.index
 
-        # The LCG algorithm requires a sequence of more than 4 elements to operate.
-        # If the sequence is not sufficiently large, we will fall back to the shuffle method.
+        # The LCG algorithm requires a sequence of more than 4 elements
+        # to operate.  If the sequence is not sufficiently large, we
+        # will fall back to the shuffle method.
         if self.seqlength > 4:
             # Sequence is large enough to use LCG algorithm
             while index < self.seqlength:

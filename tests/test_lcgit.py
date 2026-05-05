@@ -50,7 +50,7 @@ def test_state_save_and_restore(sequence):
     break_at = len(lcg1) / 2
     count = 0
     state = None
-    for i, state in lcg1:
+    for i, _state in lcg1:
         count += 1
         accumulated.append(i)
         if count == break_at:
@@ -76,8 +76,8 @@ def test_iter_consistency(sequence):
     j = iter(lcg1)
     try:
         while True:
-            (x, x_state) = next(i)
-            (y, y_state) = next(j)
+            x, x_state = next(i)
+            y, y_state = next(j)
             assert x == y, "identical iterators should generate identical values"
             assert (
                 x_state == y_state

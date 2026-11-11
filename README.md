@@ -72,17 +72,22 @@ for i in lcg(range(100_000_000_000_000)):
 
 ## Security note ⚠️ ##
 
-`lcgit` produces a *uniform* permutation, **not** an *unpredictable*
-one.  A linear congruential generator with a power-of-two modulus is
-trivially invertible: an observer who sees a handful of consecutive
-outputs (or a single emitted `state` tuple) can recover the generator's
-parameters and compute the entire remaining sequence.
+`lcgit` guarantees a *non-repeating* traversal — every element exactly
+once — **not** an *unpredictable* one.  A linear congruential generator
+with a power-of-two modulus is trivially invertible: an observer who
+sees a handful of consecutive outputs (or a single emitted `state`
+tuple) can recover the generator's parameters and compute the entire
+remaining sequence.  The orderings `lcgit` can produce are also a
+small, structured subset of all possible orderings, not a uniform
+sample of them.
 
 Do **not** use `lcgit` where an adversary must be unable to predict
 future outputs — for example, randomizing scan order so that a target
 cannot anticipate when it will be scanned.  For such cases use a keyed
-pseudo-random permutation or `secrets.SystemRandom().shuffle()` on
-chunked sub-ranges instead.
+pseudo-random permutation over the sequence index (for example,
+format-preserving encryption), or a full
+`secrets.SystemRandom().shuffle()` of the sequence when it fits in
+memory.
 
 ## Contributing ##
 

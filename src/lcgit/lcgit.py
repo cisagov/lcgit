@@ -99,6 +99,21 @@ class lcg:  # noqa: N801
         else:
             # load passed in state
             self.multiplier, self.increment, self.seed, self.index = state
+            # All four state components must be integers; a float can
+            # satisfy the arithmetic checks below and still break
+            # sequence indexing or slicing during iteration.
+            if not all(
+                isinstance(component, int)
+                for component in (
+                    self.multiplier,
+                    self.increment,
+                    self.seed,
+                    self.index,
+                )
+            ):
+                raise ValueError(
+                    "state does not describe a valid generator for this sequence"
+                )
             # A multiplier congruent to 1 (mod 4) and an odd increment are
             # the Hull-Dobell conditions for a full-period LCG with a
             # power-of-two modulus; they guarantee that the rejection loop

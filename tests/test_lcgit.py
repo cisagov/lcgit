@@ -50,9 +50,10 @@ def test_state_save_and_restore(sequence):
     break_at = len(lcg1) / 2
     count = 0
     state = None
-    for i, _state in lcg1:
+    for i, current_state in lcg1:
         count += 1
         accumulated.append(i)
+        state = current_state
         if count == break_at:
             break
     assert (
@@ -96,6 +97,32 @@ def test_invalid_input():
     """Check for expected exception when constructed with improper input."""
     with pytest.raises(ValueError):
         lcg(1)
+
+
+invalid_states = [
+    (1, 0, 110, 0),  # even increment; seed is a fixed point >= seqlength
+    (2, 1, 1, 0),  # multiplier is not congruent to 1 (mod 4)
+    (5, 2, 1, 0),  # even increment
+    (5, 3, -1, 0),  # negative seed
+    (5, 3, 200, 0),  # seed >= modulus
+    (5, 3, 1, -1),  # negative index
+    (5, 3, 1, 101),  # index past the end of the sequence
+    (5.0, 3, 1, 0),  # non-integer multiplier
+    (5, 3, 1.0, 0),  # non-integer seed
+]
+
+
+@pytest.mark.parametrize("state", invalid_states)
+def test_invalid_state(state):
+    """Check for expected exception when constructed with an invalid state."""
+    with pytest.raises(ValueError):
+        lcg(range(100), state=state)
+
+
+def test_invalid_state_small_sequence():
+    """Check for expected exception for a bad state on the shuffle path."""
+    with pytest.raises(ValueError):
+        lcg(range(3), state=(1, 1, 1.0, 0))
 
 
 def test_repr():

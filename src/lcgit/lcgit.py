@@ -68,7 +68,8 @@ class lcg:  # noqa: N801
                 as the current state of the generator.
 
         Raises:
-            ValueError: If the sequence is not of the correct type.
+            ValueError: If the sequence is not of the correct type, or if the
+                state is not valid for the sequence.
 
         """
         self.emit = emit
@@ -98,6 +99,37 @@ class lcg:  # noqa: N801
         else:
             # load passed in state
             self.multiplier, self.increment, self.seed, self.index = state
+            # All four state components must be integers; a float can
+            # satisfy the arithmetic checks below and still break
+            # sequence indexing or slicing during iteration.
+            if not all(
+                isinstance(component, int)
+                for component in (
+                    self.multiplier,
+                    self.increment,
+                    self.seed,
+                    self.index,
+                )
+            ):
+                raise ValueError(
+                    "state does not describe a valid generator for this sequence"
+                )
+            # A multiplier congruent to 1 (mod 4) and an odd increment are
+            # the Hull-Dobell conditions for a full-period LCG with a
+            # power-of-two modulus; they guarantee that the rejection loop
+            # in __iter__() terminates.  Without this check a bad state can
+            # make iteration hang, repeat values, or end early.  The
+            # shuffle fallback for small sequences uses placeholder
+            # parameters and has no rejection loop, so it is exempt.
+            if self.seqlength > 4 and (
+                self.multiplier % 4 != 1
+                or self.increment % 2 != 1
+                or not 0 <= self.seed < self.modulus
+                or not 0 <= self.index <= self.seqlength
+            ):
+                raise ValueError(
+                    "state does not describe a valid generator for this sequence"
+                )
 
     def __iter__(self):
         """Generate Iterator over the randomized sequence.

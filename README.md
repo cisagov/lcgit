@@ -74,10 +74,11 @@ for i in lcg(range(100_000_000_000_000)):
 
 `lcgit` guarantees a *non-repeating* traversal — every element exactly
 once — **not** an *unpredictable* one.  A linear congruential generator
-with a power-of-two modulus is trivially invertible: an observer who
-sees a handful of consecutive outputs (or a single emitted `state`
-tuple) can recover the generator's parameters and compute the entire
-remaining sequence.  The orderings `lcgit` can produce are also a
+with a power-of-two modulus is not cryptographically secure.  Consecutive
+internal states can reveal its parameters, but public outputs may omit
+states or hide their indices.  With the corresponding input sequence, a
+single emitted `state` tuple allows deterministic continuation.
+The orderings `lcgit` can produce are also a
 small, structured subset of all possible orderings, not a uniform
 sample of them.
 

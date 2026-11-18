@@ -119,10 +119,18 @@ def test_invalid_state(state):
         lcg(range(100), state=state)
 
 
-def test_invalid_state_small_sequence():
+invalid_states_small = [
+    (1, 0, 1.0, 0),  # float parameter
+    (1, 1, 1, -1),  # index not within expected range
+    (1, 1, 1, -4),  # index not within expected range
+]
+
+
+@pytest.mark.parametrize("state", invalid_states_small)
+def test_invalid_state_small_sequence(state):
     """Check for expected exception for a bad state on the shuffle path."""
     with pytest.raises(ValueError):
-        lcg(range(3), state=(1, 1, 1.0, 0))
+        lcg(range(3), state=state)
 
 
 def test_repr():

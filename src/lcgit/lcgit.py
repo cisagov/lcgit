@@ -121,11 +121,13 @@ class lcg:  # noqa: N801
             # make iteration hang, repeat values, or end early.  The
             # shuffle fallback for small sequences uses placeholder
             # parameters and has no rejection loop, so it is exempt.
-            if self.seqlength > 4 and (
-                self.multiplier % 4 != 1
-                or self.increment % 2 != 1
-                or not 0 <= self.seed < self.modulus
-                or not 0 <= self.index <= self.seqlength
+            if not 0 <= self.index <= self.seqlength or (
+                self.seqlength > 4
+                and (
+                    self.multiplier % 4 != 1
+                    or self.increment % 2 != 1
+                    or not 0 <= self.seed < self.modulus
+                )
             ):
                 raise ValueError(
                     "state does not describe a valid generator for this sequence"

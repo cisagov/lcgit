@@ -70,6 +70,26 @@ for i in lcg(range(100_000_000_000_000)):
 
 ## NOOICE! 🕺 ##
 
+## Security note ⚠️ ##
+
+`lcgit` guarantees a *non-repeating* traversal — every element exactly
+once — **not** an *unpredictable* one.  A linear congruential generator
+with a power-of-two modulus is not cryptographically secure.  Consecutive
+internal states can reveal its parameters, but public outputs may omit
+states or hide their indices.  With the corresponding input sequence, a
+single emitted `state` tuple allows deterministic continuation.
+The orderings `lcgit` can produce are also a
+small, structured subset of all possible orderings, not a uniform
+sample of them.
+
+Do **not** use `lcgit` where an adversary must be unable to predict
+future outputs — for example, randomizing scan order so that a target
+cannot anticipate when it will be scanned.  For such cases use a keyed
+pseudo-random permutation over the sequence index (for example,
+format-preserving encryption), or a full
+`secrets.SystemRandom().shuffle()` of the sequence when it fits in
+memory.
+
 ## Contributing ##
 
 We welcome contributions!  Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for

@@ -73,8 +73,11 @@ for i in lcg(range(100_000_000_000_000)):
 ## Security note ⚠️ ##
 
 `lcgit` guarantees a *non-repeating* traversal — every element exactly
-once — **not** an *unpredictable* one.  A linear congruential generator
-with a power-of-two modulus is not cryptographically secure.  Consecutive
+once — **not** an *unpredictable* one.  (The guarantee is positional:
+an input that contains duplicate values emits each occurrence, so
+output *values* can repeat even though no element does.)  A linear
+congruential generator with a power-of-two modulus is not
+cryptographically secure.  Consecutive
 internal states can reveal its parameters, but public outputs may omit
 states or hide their indices.  With the corresponding input sequence, a
 single emitted `state` tuple allows deterministic continuation.
